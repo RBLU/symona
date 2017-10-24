@@ -1,0 +1,8 @@
+<mat-toolbar routerLink=".">
+  <span>Batch Runs</span>
+</mat-toolbar>
+<mat-list>
+  <mat-list-item *ngFor="let run of runs" [routerLink]="[run.BOID]">
+    <batchrun-list-item [run]="run"></batchrun-list-item>
+  </mat-list-item>
+</mat-list>
