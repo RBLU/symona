@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import 'rxjs/add/operator/switchMap';
-import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
 
 @Component({
