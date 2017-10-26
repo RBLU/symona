@@ -9,6 +9,7 @@ import { MatButtonModule, MatCheckboxModule, MatToolbarModule } from '@angular/m
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CockpitModule} from "./cockpit/cockpit.module";
+import {SettingsModule} from "./settings/settings.module";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CockpitModule} from "./cockpit/cockpit.module";
     MatButtonModule,
     MatCheckboxModule,
     MatToolbarModule,
-    CockpitModule
+    CockpitModule,
+    SettingsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
