@@ -4,7 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { BatchrunListComponent } from './batchrun-list/batchrun-list.component';
 import { BatchrunListItemComponent } from './batchrun-list-item/batchrun-list-item.component';
-import { MatListModule, MatToolbarModule} from "@angular/material";
+import { MatListModule, MatToolbarModule, MatIconModule} from "@angular/material";
 
 import { CockpitComponent } from './cockpit/cockpit.component';
 import { CockpitRoutingModule} from './cockpit-routing.module';
@@ -18,7 +18,8 @@ import { BatchrunDetailComponent } from './batchrun-detail/batchrun-detail.compo
     FlexLayoutModule,
     CockpitRoutingModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatIconModule
   ],
   declarations: [
     BatchrunListComponent,

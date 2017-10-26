@@ -1,5 +1,7 @@
 <mat-toolbar routerLink=".">
-  <span>Batch Runs</span>
+  <span fxFlex="0 0 auto">Batch Runs</span>
+  <span fxFlex="1 1 100%"> </span>
+  <span fxFlex="0 0 auto"><mat-icon>filter_list</mat-icon></span>
 </mat-toolbar>
 <mat-list>
   <mat-list-item *ngFor="let run of runs" [routerLink]="[run.BOID]">
