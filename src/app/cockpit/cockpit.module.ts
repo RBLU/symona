@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SharedModule} from "../shared/shared.module";
 
 import { BatchrunListComponent } from './batchrun-list/batchrun-list.component';
 import { BatchrunListItemComponent } from './batchrun-list-item/batchrun-list-item.component';
@@ -19,7 +20,8 @@ import { BatchrunDetailComponent } from './batchrun-detail/batchrun-detail.compo
     CockpitRoutingModule,
     MatListModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    SharedModule
   ],
   declarations: [
     BatchrunListComponent,

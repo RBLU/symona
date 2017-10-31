@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Batchrun} from '../../batchrun';
+import { Batchrun} from '../../shared/models/batchrun';
+import { MonitoringService } from "../../shared/monitoring.service";
 
 
 @Component({
@@ -11,15 +12,12 @@ export class BatchrunListComponent implements OnInit {
 
   runs: [Batchrun];
 
-  constructor() {
-    this.runs = [
-      new Batchrun('123123', 'PoliceEVDrucken', new Date()),
-      new Batchrun('345345', 'PoliceEVDrucken', new Date()),
-      new Batchrun('456465', 'PoliceEVDrucken', new Date()),
-    ]
-  }
+  constructor(public monitoringService: MonitoringService) { }
 
   ngOnInit() {
+      this.monitoringService.getRuns().subscribe((runs) => {
+        this.runs = runs;
+      });
   }
 
 }

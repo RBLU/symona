@@ -1,13 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatToolbarModule } from '@angular/material';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatToolbarModule} from '@angular/material';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { CockpitModule} from "./cockpit/cockpit.module";
-import { SettingsModule } from "./settings/settings.module";
+import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {CockpitModule} from "./cockpit/cockpit.module";
+import {SettingsModule} from "./settings/settings.module";
+import {API_URL, HttpBaseUrlInterceptor} from "./shared/HttpBaseUrlInterceptor";
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -25,7 +28,15 @@ import { SettingsModule } from "./settings/settings.module";
     CockpitModule,
     SettingsModule
   ],
-  providers: [],
+  providers: [
+    {provide: API_URL, useValue: environment.apiUrl},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpBaseUrlInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
