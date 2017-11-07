@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Batchrun} from '../../core/models/batchrun';
+import { Run} from '../../core/models/run';
 import { MonitoringService } from "../../core/monitoring.service";
 
 
 @Component({
-  selector: 'batchrun-list',
-  templateUrl: './batchrun-list.component.html',
-  styleUrls: ['./batchrun-list.component.scss']
+  selector: 'run-list',
+  templateUrl: './run-list.component.html',
+  styleUrls: ['./run-list.component.scss']
 })
-export class BatchrunListComponent implements OnInit {
+export class RunListComponent implements OnInit {
 
-  runs: [Batchrun];
+  runs: [Run];
 
   constructor(public monitoringService: MonitoringService) { }
 

@@ -3,12 +3,12 @@ import {CommonModule} from '@angular/common';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SharedModule} from "../shared/shared.module";
 
-import {BatchrunListComponent} from './batchrun-list/batchrun-list.component';
-import {BatchrunListItemComponent} from './batchrun-list-item/batchrun-list-item.component';
+import {RunListComponent} from './run-list/run-list.component';
+import {RunListItemComponent} from './run-list-item/run-list-item.component';
 import {CockpitComponent} from './cockpit/cockpit.component';
 import {CockpitRoutingModule} from './cockpit-routing.module';
 import {CockpitHomeComponent} from './cockpit-home/cockpit-home.component';
-import {BatchrunDetailComponent} from './batchrun-detail/batchrun-detail.component';
+import {RunDetailComponent} from './run-detail/run-detail.component';
 import {HttpClientModule} from "@angular/common/http";
 
 
@@ -21,11 +21,11 @@ import {HttpClientModule} from "@angular/common/http";
     HttpClientModule
   ],
   declarations: [
-    BatchrunListComponent,
-    BatchrunListItemComponent,
+    RunListComponent,
+    RunListItemComponent,
     CockpitComponent,
     CockpitHomeComponent,
-    BatchrunDetailComponent
+    RunDetailComponent
   ],
   exports: [
     CockpitComponent

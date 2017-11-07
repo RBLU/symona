@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BatchrunDetailComponent } from './batchrun-detail.component';
+import { RunDetailComponent } from './run-detail.component';
 
-describe('BatchrunDetailComponent', () => {
-  let component: BatchrunDetailComponent;
-  let fixture: ComponentFixture<BatchrunDetailComponent>;
+describe('RunDetailComponent', () => {
+  let component: RunDetailComponent;
+  let fixture: ComponentFixture<RunDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BatchrunDetailComponent ]
+      declarations: [ RunDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BatchrunDetailComponent);
+    fixture = TestBed.createComponent(RunDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

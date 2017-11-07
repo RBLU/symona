@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CockpitComponent }    from './cockpit/cockpit.component';
 import {CockpitHomeComponent} from "./cockpit-home/cockpit-home.component";
-import {BatchrunDetailComponent} from "./batchrun-detail/batchrun-detail.component";
+import {RunDetailComponent} from "./run-detail/run-detail.component";
 
 const heroesRoutes: Routes = [
   { path: 'cockpit',
@@ -13,8 +13,8 @@ const heroesRoutes: Routes = [
         path: '',
         component: CockpitHomeComponent
       }, {
-        path: ':id',
-        component: BatchrunDetailComponent
+        path: ':boid',
+        component: RunDetailComponent
       }
     ]}
 ];

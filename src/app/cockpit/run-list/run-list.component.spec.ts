@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BatchrunListComponent } from './batchrun-list.component';
+import { BatchrunListComponent } from './run-list.component';
 
 describe('BatchrunListComponent', () => {
   let component: BatchrunListComponent;

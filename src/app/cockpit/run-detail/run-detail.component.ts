@@ -3,13 +3,13 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import "rxjs/add/operator/map";
 
 @Component({
-  selector: 'batchrun-detail',
-  templateUrl: './batchrun-detail.component.html',
-  styleUrls: ['./batchrun-detail.component.scss']
+  selector: 'run-detail',
+  templateUrl: './run-detail.component.html',
+  styleUrls: ['./run-detail.component.scss']
 })
-export class BatchrunDetailComponent implements OnInit {
+export class RunDetailComponent implements OnInit {
 
-  batchRunId: string;
+  runId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,8 +19,8 @@ export class BatchrunDetailComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap
       .map((params: ParamMap) =>
-        params.get('id'))
-      .subscribe(id => {console.log('hello: ' + id); this.batchRunId = id});
+        params.get('boid'))
+      .subscribe(boid => {console.log('hello: ' + boid); this.runId = boid});
   }
 
 }
