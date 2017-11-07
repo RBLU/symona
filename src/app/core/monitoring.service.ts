@@ -11,8 +11,8 @@ export class MonitoringService {
 
   getRuns(): Observable<[Run]> {
 
-    return Observable.timer(0, 15000)
-      .switchMap(() => this.http.get<[Run]>('/runs?expand=itsMonitoring'))
+    return Observable.timer(0, 60000)
+      .switchMap(() => this.http.get<[Run]>('/runs?expand=itsMonitoring&orderBy=started|desc'))
   }
 
   getRunById(id: string): Observable<Run> {
