@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Batchrun} from "../../shared/models/batchrun";
+import {Batchrun} from "../../core/models/batchrun";
 
 @Component({
   selector: 'batchrun-list-item',

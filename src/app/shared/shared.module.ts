@@ -1,17 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {FormsModule} from "@angular/forms";
 
-import {HttpClientModule} from '@angular/common/http';
-import {MonitoringService} from "./monitoring.service";
+import {MatButtonModule, MatIconModule, MatListModule, MatToolbarModule} from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule
   ],
   declarations: [],
   providers: [
-    MonitoringService
-  ]
+  ],
+  exports:      [
+    CommonModule,
+    FormsModule,
+
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule]
+
 })
 export class SharedModule { }

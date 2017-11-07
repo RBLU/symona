@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Batchrun} from '../../shared/models/batchrun';
-import { MonitoringService } from "../../shared/monitoring.service";
+import { Batchrun} from '../../core/models/batchrun';
+import { MonitoringService } from "../../core/monitoring.service";
 
 
 @Component({
