@@ -4,7 +4,7 @@
   <span fxFlex="0 0 auto"><mat-icon>filter_list</mat-icon></span>
 </mat-toolbar>
 <mat-list dense>
-  <mat-list-item *ngFor="let run of runs" [routerLink]="[run.boid]" routerLinkActive="active-link">
+  <mat-list-item *ngFor="let run of runs$ | async" [routerLink]="[run.boid]" routerLinkActive="active-link">
     <run-list-item [run]="run" fxFlex="1 1 100%"></run-list-item>
   </mat-list-item>
 </mat-list>

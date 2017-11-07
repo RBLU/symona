@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Run} from '../../core/models/run';
 import { MonitoringService } from "../../core/monitoring.service";
+import {Observable} from "rxjs/Observable";
 
 
 @Component({
@@ -10,14 +11,12 @@ import { MonitoringService } from "../../core/monitoring.service";
 })
 export class RunListComponent implements OnInit {
 
-  runs: [Run];
+  runs$: Observable<[Run]>;
 
   constructor(public monitoringService: MonitoringService) { }
 
   ngOnInit() {
-      this.monitoringService.getRuns().subscribe((runs) => {
-        this.runs = runs;
-      });
+      this.runs$ = this.monitoringService.getRuns();
   }
 
 }
