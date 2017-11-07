@@ -1,3 +1,14 @@
-<p>
-  batchrun-list-item works!  {{run.runStatus}}
-</p>
+<div fxLayout="row">
+  <div fxFlex="1 1 auto">
+    {{run.monitoring.name}} <br>{{run.started | date:'medium'}}
+  </div>
+  <div fxFlex="0 0 auto">
+    <mat-icon [ngClass]="run.runStatus">{{getRunIcon()}}</mat-icon>
+  </div>
+  <div fxFlex="0 0 auto">
+    <mat-chip-list>
+      <mat-chip>{{run.operatorStatus}}</mat-chip>
+    </mat-chip-list>
+  </div>
+
+</div>

@@ -3,6 +3,7 @@ export class Run {
   constructor(
     public boid: string,
     public itsMonitoring: string,
+    public monitoring: any,
     public runStatus: string,
     public operatorStatus: string,
     public started: Date,
@@ -11,6 +12,5 @@ export class Run {
     public created_at: Date,
     public updated_at: Date,
 
-  ) {
-  }
+  ) { }
 }

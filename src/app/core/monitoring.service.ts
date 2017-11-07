@@ -10,7 +10,7 @@ export class MonitoringService {
   }
 
   getRuns(): Observable<[Run]> {
-    return this.http.get<[Run]>('/runs');
+    return this.http.get<[Run]>('/runs?expand=itsMonitoring');
   }
 
   getRunById(id: string): Observable<Run> {

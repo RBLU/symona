@@ -11,7 +11,19 @@ export class RunListItemComponent implements OnInit {
   @Input()
   run: Run;
 
-  constructor() { }
+  private statusIconMap = {
+    red: 'error',
+    yellow: 'warning',
+    green: 'check_circle'
+  };
+
+
+  constructor() {
+  }
+
+  getRunIcon(): string {
+    return this.statusIconMap[this.run.runStatus];
+  }
 
   ngOnInit() {
   }
