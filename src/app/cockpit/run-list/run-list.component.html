@@ -1,7 +1,18 @@
-<mat-toolbar routerLink=".">
+<mat-toolbar>
   <span fxFlex="0 0 auto">Runs</span>
   <span fxFlex="1 1 100%"> </span>
-  <span fxFlex="0 0 auto"><mat-icon>filter_list</mat-icon></span>
+  <span fxFlex="0 0 auto"   >
+    <button [matMenuTriggerFor]="filter" [ngClass]="{'filter-active': currentFilter !== ''}">
+      <mat-icon>filter_list</mat-icon>
+    </button>
+  </span>
+  <mat-menu #filter="matMenu">
+    <button mat-menu-item (click)="setFilter('red')"> <mat-icon>error</mat-icon> Rot</button>
+    <button mat-menu-item (click)="setFilter('yellow')"> <mat-icon>warning</mat-icon> Gelb </button>
+    <button mat-menu-item (click)="setFilter('green')"> <mat-icon>check_circle</mat-icon> Grün </button>
+    <button mat-menu-item (click)="setFilter('')"> Alle </button>
+  </mat-menu>
+
 </mat-toolbar>
 <mat-list dense>
   <mat-list-item *ngFor="let run of runs$ | async" [routerLink]="[run.boid]" routerLinkActive="active-link">

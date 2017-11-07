@@ -12,11 +12,16 @@ import {Observable} from "rxjs/Observable";
 export class RunListComponent implements OnInit {
 
   runs$: Observable<[Run]>;
+  currentFilter: string = '';
 
   constructor(public monitoringService: MonitoringService) { }
 
+  setFilter(filterValue) {
+    this.currentFilter = filterValue;
+    this.runs$ = this.monitoringService.getRuns(this.currentFilter);
+  }
   ngOnInit() {
-      this.runs$ = this.monitoringService.getRuns();
+      this.runs$ = this.monitoringService.getRuns(this.currentFilter);
   }
 
 }
