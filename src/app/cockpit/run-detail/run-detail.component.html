@@ -1,3 +1,5 @@
-<p>
-  batchrun-detail works: {{runId}}
-</p>
+<mat-toolbar>
+
+  {{(run$ | async)?.monitoring.name}} Start: {{(run$ | async)?.started | date:'medium'}}
+
+</mat-toolbar>

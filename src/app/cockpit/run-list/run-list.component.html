@@ -1,6 +1,6 @@
 <mat-toolbar>
   <span fxFlex="0 0 auto">Runs</span>
-  <span fxFlex="0 0 auto">
+  <span fxFlex="0 0 180px">
     <mat-form-field>
       <input type="text" matInput [matAutocomplete]="auto" placeholder="Pick one" [formControl]="monNamesCtrl">
        <mat-autocomplete #auto="matAutocomplete">
@@ -10,7 +10,6 @@
     </mat-autocomplete>
     </mat-form-field>
   </span>
-  <span fxFlex="1 1 100%"> </span>
   <span fxFlex="0 0 auto">
     <button [matMenuTriggerFor]="filter" [ngClass]="{'filter-active': currentFilter !== ''}">
       <mat-icon>filter_list</mat-icon>
