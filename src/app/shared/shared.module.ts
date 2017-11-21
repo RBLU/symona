@@ -6,8 +6,9 @@ import {
   MatButtonModule, MatIconModule, MatListModule, MatToolbarModule, MatChipsModule,
   MatMenuModule,
   MatAutocompleteModule,
-  MatInputModule
+  MatInputModule, MatDatepickerModule
 } from '@angular/material';
+import {MatMomentDateModule} from "@angular/material-moment-adapter";
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import {
     MatChipsModule,
     MatMenuModule,
     MatAutocompleteModule,
-    MatInputModule]
+    MatInputModule,
+    MatDatepickerModule, MatMomentDateModule]
 
 })
 export class SharedModule {

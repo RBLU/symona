@@ -1,11 +1,17 @@
 <mat-toolbar>
   <span fxFlex="0 0 auto">Runs</span>
-  <span fxFlex="0 0 180px">
+  <span fxFlex="0 0 160px">
     <mat-form-field>
-      <input  #nameFilter type="text" matInput placeholder="filter" [formControl]="monFilterCtrl">
+      <input  #nameFilter type="text" matInput placeholder="Batchname" [formControl]="monFilterCtrl">
     </mat-form-field>
   </span>
-  <span fxFlex="0 0 auto">
+  <mat-form-field fxFlex="0 0 120px">
+    <input matInput [matDatepicker]="picker" placeholder="Datum" [formControl]="dateCtrl">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <span fxFlex="1 0 auto"></span>
+  <span fxFlex="0 0 30px">
     <button [matMenuTriggerFor]="filter" [ngClass]="{'filter-active': runStatusFilter !== ''}">
       <mat-icon>filter_list</mat-icon>
     </button>
@@ -25,7 +31,6 @@
     </button>
     <button mat-menu-item (click)="setStatusFilter('')"> Alle</button>
   </mat-menu>
-
 </mat-toolbar>
 <mat-list dense>
   <mat-list-item *ngFor="let run of runs$ | async" [routerLink]="[run.boid]" routerLinkActive="active-link">

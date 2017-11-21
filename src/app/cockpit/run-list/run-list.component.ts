@@ -13,7 +13,8 @@ import {Subject} from "rxjs/Subject";
 })
 export class RunListComponent {
 
-  monFilterCtrl: FormControl = new FormControl();
+  monFilterCtrl =  new FormControl();
+  dateCtrl  = new FormControl();
   runs$: Observable<[Run]>;
   private statusFilterSubject = new Subject<string>();
   private statusFilter$ = this.statusFilterSubject.asObservable();
@@ -23,8 +24,8 @@ export class RunListComponent {
       .startWith('')
       .debounceTime(500)
       .distinctUntilChanged()
-      .combineLatest(this.statusFilter$.startWith('').distinctUntilChanged())
-      .switchMap((filters) => this.monitoringService.getRuns(filters[1], filters[0]))
+      .combineLatest(this.statusFilter$.startWith('').distinctUntilChanged(), this.dateCtrl.valueChanges.startWith(null).distinctUntilChanged())
+      .switchMap((filters) => this.monitoringService.getRuns(filters[1], filters[0], filters[2]))
   }
 
   setStatusFilter(filterValue) {
