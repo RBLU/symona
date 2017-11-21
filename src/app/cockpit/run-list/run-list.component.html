@@ -2,33 +2,28 @@
   <span fxFlex="0 0 auto">Runs</span>
   <span fxFlex="0 0 180px">
     <mat-form-field>
-      <input type="text" matInput [matAutocomplete]="auto" placeholder="Pick one" [formControl]="monNamesCtrl">
-       <mat-autocomplete #auto="matAutocomplete">
-         <mat-option *ngFor="let name of filteredMonitoringNames$ | async" [value]="name">
-            <span>{{ name }}</span>
-          </mat-option>
-    </mat-autocomplete>
+      <input  #nameFilter type="text" matInput placeholder="filter" [formControl]="monFilterCtrl">
     </mat-form-field>
   </span>
   <span fxFlex="0 0 auto">
-    <button [matMenuTriggerFor]="filter" [ngClass]="{'filter-active': currentFilter !== ''}">
+    <button [matMenuTriggerFor]="filter" [ngClass]="{'filter-active': runStatusFilter !== ''}">
       <mat-icon>filter_list</mat-icon>
     </button>
   </span>
   <mat-menu #filter="matMenu">
-    <button mat-menu-item (click)="setFilter('red')">
+    <button mat-menu-item (click)="setStatusFilter('red')">
       <mat-icon>error</mat-icon>
       Rot
     </button>
-    <button mat-menu-item (click)="setFilter('yellow')">
+    <button mat-menu-item (click)="setStatusFilter('yellow')">
       <mat-icon>warning</mat-icon>
       Gelb
     </button>
-    <button mat-menu-item (click)="setFilter('green')">
+    <button mat-menu-item (click)="setStatusFilter('green')">
       <mat-icon>check_circle</mat-icon>
       Grün
     </button>
-    <button mat-menu-item (click)="setFilter('')"> Alle</button>
+    <button mat-menu-item (click)="setStatusFilter('')"> Alle</button>
   </mat-menu>
 
 </mat-toolbar>

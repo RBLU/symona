@@ -3,6 +3,7 @@ import {Run} from '../../core/models/run';
 import {MonitoringService} from "../../core/monitoring.service";
 import {Observable} from "rxjs/Observable";
 import {FormControl} from '@angular/forms';
+import {Subject} from "rxjs/Subject";
 
 
 @Component({
@@ -10,27 +11,23 @@ import {FormControl} from '@angular/forms';
   templateUrl: './run-list.component.html',
   styleUrls: ['./run-list.component.scss']
 })
-export class RunListComponent implements OnInit {
+export class RunListComponent {
 
-  monNamesCtrl: FormControl = new FormControl();
+  monFilterCtrl: FormControl = new FormControl();
   runs$: Observable<[Run]>;
-  currentFilter: string = '';
-  filteredMonitoringNames$:  Observable<string[]>;
+  private statusFilterSubject = new Subject<string>();
+  private statusFilter$ = this.statusFilterSubject.asObservable();
 
   constructor(public monitoringService: MonitoringService) {
-    this.filteredMonitoringNames$ = this.monNamesCtrl.valueChanges
-      .startWith(null)
+    this.runs$ = this.monFilterCtrl.valueChanges
+      .startWith('')
       .debounceTime(500)
-      .switchMap(filterString => filterString && filterString.length > 1 ? monitoringService.getMonitoringNames(filterString) :[]);
+      .distinctUntilChanged()
+      .combineLatest(this.statusFilter$.startWith('').distinctUntilChanged())
+      .switchMap((filters) => this.monitoringService.getRuns(filters[1], filters[0]))
   }
 
-  setFilter(filterValue) {
-    this.currentFilter = filterValue;
-    this.runs$ = this.monitoringService.getRuns(this.currentFilter);
+  setStatusFilter(filterValue) {
+    this.statusFilterSubject.next(filterValue);
   }
-
-  ngOnInit() {
-    this.runs$ = this.monitoringService.getRuns(this.currentFilter);
-  }
-
 }
