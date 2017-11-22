@@ -12,7 +12,7 @@
   </mat-form-field>
   <span fxFlex="1 0 auto"></span>
   <span fxFlex="0 0 30px">
-    <button [matMenuTriggerFor]="filter" [ngClass]="{'filter-active': runStatusFilter !== ''}">
+    <button [matMenuTriggerFor]="filter">
       <mat-icon>filter_list</mat-icon>
     </button>
   </span>
@@ -36,4 +36,6 @@
   <mat-list-item *ngFor="let run of runs$ | async" [routerLink]="[run.boid]" routerLinkActive="active-link">
     <run-list-item [run]="run" fxFlex="1 1 100%"></run-list-item>
   </mat-list-item>
+  <mat-paginator [length]="resultsLength" [pageSize]="15">
+  </mat-paginator>
 </mat-list>
