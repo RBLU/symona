@@ -22,7 +22,7 @@ export class RunListComponent {
   constructor(public monitoringService: MonitoringService) {
     this.runs$ = this.monFilterCtrl.valueChanges
       .startWith('')
-      .debounceTime(500)
+      .debounceTime(300)
       .distinctUntilChanged()
       .combineLatest(this.statusFilter$.startWith('').distinctUntilChanged(), this.dateCtrl.valueChanges.startWith(null).distinctUntilChanged())
       .switchMap((filters) => this.monitoringService.getRuns(filters[1], filters[0], filters[2]))
