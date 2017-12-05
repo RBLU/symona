@@ -6,7 +6,7 @@ import {
   MatButtonModule, MatIconModule, MatListModule, MatToolbarModule, MatChipsModule,
   MatMenuModule,
   MatAutocompleteModule,
-  MatInputModule, MatDatepickerModule, MatPaginatorModule
+  MatInputModule, MatDatepickerModule, MatPaginatorModule, MatCardModule
 } from '@angular/material';
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 
@@ -29,7 +29,10 @@ import {MatMomentDateModule} from "@angular/material-moment-adapter";
     MatMenuModule,
     MatAutocompleteModule,
     MatInputModule,
-    MatDatepickerModule, MatMomentDateModule, MatPaginatorModule]
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatPaginatorModule,
+    MatCardModule]
 
 })
 export class SharedModule {

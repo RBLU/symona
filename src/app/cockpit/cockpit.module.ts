@@ -11,6 +11,8 @@ import {CockpitRoutingModule} from './cockpit-routing.module';
 import {CockpitHomeComponent} from './cockpit-home/cockpit-home.component';
 import {RunDetailComponent} from './run-detail/run-detail.component';
 import {HttpClientModule} from "@angular/common/http";
+import {InspectionValueComponent} from './inspection-value/inspection-value.component';
+import { InspectionListComponent } from './inspection-list/inspection-list.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import {HttpClientModule} from "@angular/common/http";
     RunListItemComponent,
     CockpitComponent,
     CockpitHomeComponent,
-    RunDetailComponent
+    RunDetailComponent,
+    InspectionValueComponent,
+    InspectionListComponent
   ],
   exports: [
     CockpitComponent

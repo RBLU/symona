@@ -3,6 +3,7 @@ import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Run} from "./models/run";
 import {Observable} from "rxjs/Rx";
 import * as moment from 'moment';
+import {Inspection} from "./models/inspection";
 
 const QUERY_SEPARATOR = "|";
 
@@ -36,6 +37,10 @@ export class MonitoringService {
 
   getRunById(id: string): Observable<Run> {
     return this.http.get<Run>('/runs/' + id + '?expand=itsMonitoring');
+  }
+
+  getInspectionsForRun(boid: string): Observable<Inspection[]> {
+    return this.http.get<Inspection[]>('/runs/' + boid + 'inspections');
   }
 
 }

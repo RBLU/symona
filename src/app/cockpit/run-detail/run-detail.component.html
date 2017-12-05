@@ -3,3 +3,16 @@
   {{(run$ | async)?.monitoring.name}} Start: {{(run$ | async)?.started | date:'medium'}}
 
 </mat-toolbar>
+
+<inspection-list [runId]="(run$ | async)?.boid"></inspection-list>
+
+<mat-card>
+  <mat-card-title>Comments</mat-card-title>
+  <mat-card-content>
+  </mat-card-content>
+</mat-card>
+
+
+
+
+{{ run$ | async | json }}

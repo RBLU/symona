@@ -4,6 +4,7 @@ import "rxjs/add/operator/map";
 import {Observable} from "rxjs/Observable";
 import {Run} from "../../core/models/run";
 import {MonitoringService} from "../../core/monitoring.service";
+import {Inspection} from "../../core/models/inspection";
 
 @Component({
   selector: 'run-detail',

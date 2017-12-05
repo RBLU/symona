@@ -1,3 +1,5 @@
+import {Inspection} from "./inspection";
+
 export class Run {
 
   constructor(
@@ -11,6 +13,6 @@ export class Run {
     public ignored: boolean,
     public created_at: Date,
     public updated_at: Date,
-
+    public inspections?: Inspection[]
   ) { }
 }
