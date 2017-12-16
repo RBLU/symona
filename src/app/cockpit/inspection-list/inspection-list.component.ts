@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, OnChanges} from '@angular/core';
 import {Inspection} from "../../core/models/inspection";
 import {MonitoringService} from "../../core/monitoring.service";
 import {ParamMap} from "@angular/router";
@@ -9,7 +9,7 @@ import {Observable} from "rxjs/Observable";
   templateUrl: './inspection-list.component.html',
   styleUrls: ['./inspection-list.component.scss']
 })
-export class InspectionListComponent implements OnInit {
+export class InspectionListComponent implements OnChanges {
 
   @Input() runId : string;
   inspections$: Observable<Inspection[]>;
@@ -19,8 +19,10 @@ export class InspectionListComponent implements OnInit {
     private monitoringService: MonitoringService
   ) { }
 
-  ngOnInit() {
-    this.inspections$ = this.monitoringService.getInspectionsForRun(this.runId);
+  ngOnChanges() {
+    if (this.runId) {
+      this.inspections$ = this.monitoringService.getInspectionsForRun(this.runId);
+    }
   }
 
 }

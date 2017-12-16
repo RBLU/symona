@@ -40,7 +40,7 @@ export class MonitoringService {
   }
 
   getInspectionsForRun(boid: string): Observable<Inspection[]> {
-    return this.http.get<Inspection[]>('/runs/' + boid + 'inspections');
+    return this.http.get<Inspection[]>('/runs/' + boid + '/inspections');
   }
 
 }
