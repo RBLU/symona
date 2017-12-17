@@ -1,8 +1,6 @@
 import {Component, OnInit, Input, ElementRef, OnChanges} from '@angular/core';
 import {Inspection} from "../../core/models/inspection";
 import {D3Service, D3, Selection} from 'd3-ng2-service';
-import {D3DragEvent} from "d3-drag";
-import {D3ZoomEvent} from "d3-zoom";
 import {ScaleLinear} from "d3-scale";
 
 @Component({
@@ -32,6 +30,7 @@ export class InspectionValueComponent implements OnInit, OnChanges {
     let d3ParentElement: Selection<HTMLElement, any, null, undefined>;
 
     if (this.parentNativeElement !== null) {
+      this.width  = this.parentNativeElement.offsetWidth;
 
 
       d3ParentElement = d3.select(this.parentNativeElement);
@@ -42,7 +41,6 @@ export class InspectionValueComponent implements OnInit, OnChanges {
       this.d3Svg.attr('height', this.height);
       this.d3G = this.d3Svg.append<SVGGElement>('g');
       this.d3CaptionG = this.d3G.append<SVGGElement>('g');
-
       if (this.d3G && this.inspection) {
         this.render(this.inspection);
       }
@@ -50,12 +48,11 @@ export class InspectionValueComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
+    console.log('width: ' + this.parentNativeElement.clientWidth);
     if (this.inspection && this.d3G) {
       this.render(this.inspection);
     }
   }
-
-
 
   private render(insp: Inspection) {
     const d3 = this.d3;
