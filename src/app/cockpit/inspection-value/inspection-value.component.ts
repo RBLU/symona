@@ -14,12 +14,13 @@ export class InspectionValueComponent implements OnInit, OnChanges {
 
   @Input() inspection: Inspection;
   @Input() width: number = 200;
-  @Input() height: number = 50;
+  @Input() height: number = 60;
 
   private d3: D3;
   private parentNativeElement: any;
   private d3Svg: Selection<SVGSVGElement, any, null, undefined>;
   private d3G: Selection<SVGGElement, any, null, undefined>;
+  private d3CaptionG: Selection<SVGGElement, any, null, undefined>;
 
   constructor(element: ElementRef, d3Service: D3Service) {
     this.d3 = d3Service.getD3();
@@ -40,6 +41,7 @@ export class InspectionValueComponent implements OnInit, OnChanges {
       this.d3Svg.attr('width', this.width);
       this.d3Svg.attr('height', this.height);
       this.d3G = this.d3Svg.append<SVGGElement>('g');
+      this.d3CaptionG = this.d3G.append<SVGGElement>('g');
 
       if (this.d3G && this.inspection) {
         this.render(this.inspection);
@@ -65,28 +67,49 @@ export class InspectionValueComponent implements OnInit, OnChanges {
         .range([0, this.width]);
 
 
-    function drawRect(left: number, right: number, heigth: number, cssClass: string): void {
+    const drawRect = (left: number, right: number, cssClass: string): void => {
       d3G
         .append('rect')
         .attr('class', cssClass)
-        .attr('x', left)
+        .attr('x', x(left))
         .attr('y', 0)
-        .attr('width', right - left)
-        .attr('height', heigth);
-    }
+        .attr('width', x(right) - x(left))
+        .attr('height', this.height/3);
+    };
+
+    const drawCaption = (xPos: number, caption?: string) => {
+      if (!caption) {
+        caption = ''+xPos;
+      }
+      this.d3CaptionG
+        .append('text')
+        .attr('class', 'settings')
+        .text(caption)
+        .attr("transform", "translate("+x(xPos)+","+this.height/2 +")rotate(-45)")
+        .attr('text-anchor', 'end');
+    };
 
     // draw our 5 rects with the correct coordinates and colors
-    drawRect(x(insp.levelMin), x(insp.levelLowError), this.height, 'settings error');
-    drawRect(x(insp.levelLowError), x(insp.levelLowWarning), this.height, 'settings warning');
-    drawRect(x(insp.levelLowWarning), x(insp.levelHighWarning), this.height, 'settings normal');
-    drawRect(x(insp.levelHighWarning), x(insp.levelHighError), this.height, 'settings warning');
-    drawRect(x(insp.levelHighError), x(insp.levelMax), this.height, 'settings error');
+    drawRect(insp.levelMin, insp.levelLowError, 'settings error');
+    drawRect(insp.levelLowError, insp.levelLowWarning, 'settings warning');
+    drawRect(insp.levelLowWarning, insp.levelHighWarning, 'settings normal');
+    drawRect(insp.levelHighWarning, insp.levelHighError, 'settings warning');
+    drawRect(insp.levelHighError, insp.levelMax, 'settings error');
+
+    // draw the captions on the x axis
+
+    drawCaption( insp.levelMin);
+    drawCaption(insp.levelLowError);
+    drawCaption(insp.levelLowWarning);
+    drawCaption(insp.levelHighWarning);
+    drawCaption(insp.levelHighError);
+    drawCaption(insp.levelMax);
 
     // draw the dot
     d3G.append('circle')
       .attr('cx', x(Math.min(Math.max(insp.value, insp.levelMin), insp.levelMax)))
-      .attr('cy', this.height/2)
-      .attr('r', this.height/4)
+      .attr('cy', this.height/6)
+      .attr('r', this.height/12)
       .attr('fill', 'blue')
   }
 
