@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-title>Inspections for {{runId}}</mat-card-title>
+  <mat-card-title>Kennzahlen</mat-card-title>
   <mat-card-content>
     <inspection-value *ngFor="let insp of inspections$ | async" [inspection]="insp"></inspection-value>
   </mat-card-content>

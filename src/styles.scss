@@ -3,3 +3,22 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./sass/variables";
 @import "./sass/mixins";
+
+$color41:		#93c47D;		// status: normal
+$color42:		#FFE599;		// status: warning
+$color43:		#E06666;		// status: error
+
+rect {
+  &.error {
+    fill: $color43;
+    background: $color43;
+  }
+  &.warning {
+    fill: $color42;
+    background: $color42;
+  }
+  &.normal {
+    fill: $color41;
+    background: $color41;
+  }
+}

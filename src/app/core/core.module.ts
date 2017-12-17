@@ -5,6 +5,7 @@ import {
 
 import {CommonModule} from '@angular/common';
 import {MonitoringService} from "./monitoring.service";
+import { D3Service } from 'd3-ng2-service';
 
 
 //import { TitleComponent }    from './title.component';
@@ -13,7 +14,7 @@ import {MonitoringService} from "./monitoring.service";
   imports: [CommonModule],
 //  declarations: [ TitleComponent ],
 //  exports:      [ TitleComponent ],
-  providers: [MonitoringService]
+  providers: [MonitoringService, D3Service]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

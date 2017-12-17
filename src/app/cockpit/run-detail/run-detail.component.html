@@ -3,16 +3,12 @@
   {{(run$ | async)?.monitoring.name}} Start: {{(run$ | async)?.started | date:'medium'}}
 
 </mat-toolbar>
+<div fxLayout="row">
+  <inspection-list fxFlex [runId]="(run$ | async)?.boid"></inspection-list>
 
-<inspection-list [runId]="(run$ | async)?.boid"></inspection-list>
-
-<mat-card>
-  <mat-card-title>Comments</mat-card-title>
-  <mat-card-content>
-  </mat-card-content>
-</mat-card>
-
-
-
-
-{{ run$ | async | json }}
+  <mat-card fxFlex>
+    <mat-card-title>Kommentare</mat-card-title>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+</div>
