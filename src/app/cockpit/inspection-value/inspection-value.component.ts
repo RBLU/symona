@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ElementRef, OnChanges} from '@angular/core';
+import {Component, OnInit, Input, ElementRef, OnChanges, ViewChild} from '@angular/core';
 import {Inspection} from "../../core/models/inspection";
 import {D3Service, D3, Selection} from 'd3-ng2-service';
 import {ScaleLinear} from "d3-scale";
@@ -6,13 +6,17 @@ import {ScaleLinear} from "d3-scale";
 @Component({
   selector: 'inspection-value',
   templateUrl: './inspection-value.component.html',
-  styleUrls: ['./inspection-value.component.scss']
+  styleUrls: ['./inspection-value.component.scss'],
+  host: {
+    '(window:resize)': 'onResize($event)'
+  }
 })
 export class InspectionValueComponent implements OnInit, OnChanges {
 
   @Input() inspection: Inspection;
   @Input() width: number = 200;
   @Input() height: number = 60;
+  @ViewChild('svgContainer') svgContainer: ElementRef;
 
   private d3: D3;
   private parentNativeElement: any;
@@ -20,19 +24,17 @@ export class InspectionValueComponent implements OnInit, OnChanges {
   private d3G: Selection<SVGGElement, any, null, undefined>;
   private d3CaptionG: Selection<SVGGElement, any, null, undefined>;
 
-  constructor(element: ElementRef, d3Service: D3Service) {
+  constructor(d3Service: D3Service) {
     this.d3 = d3Service.getD3();
-    this.parentNativeElement = element.nativeElement;
   }
 
   ngOnInit() {
     let d3 = this.d3;
     let d3ParentElement: Selection<HTMLElement, any, null, undefined>;
+    this.parentNativeElement = this.svgContainer.nativeElement;
 
     if (this.parentNativeElement !== null) {
       this.width  = this.parentNativeElement.offsetWidth;
-
-
       d3ParentElement = d3.select(this.parentNativeElement);
 
       this.d3Svg = d3ParentElement.select<SVGSVGElement>('svg');
@@ -48,16 +50,30 @@ export class InspectionValueComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log('width: ' + this.parentNativeElement.clientWidth);
-    if (this.inspection && this.d3G) {
+    if (this.inspection && this.d3G && this.parentNativeElement) {
+      console.log('width: ' + this.parentNativeElement.clientWidth);
       this.render(this.inspection);
     }
+  }
+
+  onResize(event){
+    this.width  = this.parentNativeElement.offsetWidth;
+    if (this.inspection) {
+     this.resize();
+    }
+  }
+
+  private resize() {
+    this.d3Svg.attr('width', this.width);
+    this.d3Svg.attr('height', this.height);
+    this.render(this.inspection);
   }
 
   private render(insp: Inspection) {
     const d3 = this.d3;
     let d3G = this.d3G;
 
+    d3G.selectAll('.settings').remove();
     const x: ScaleLinear<number, number> =
       d3.scaleLinear()
         .domain([insp.levelMin, insp.levelMax])

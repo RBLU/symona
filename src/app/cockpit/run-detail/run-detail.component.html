@@ -4,9 +4,9 @@
 
 </mat-toolbar>
 <div fxLayout="row">
-  <inspection-list fxFlex [runId]="(run$ | async)?.boid"></inspection-list>
+  <inspection-list fxFlex="1 1 50%" [runId]="(run$ | async)?.boid"></inspection-list>
 
-  <mat-card fxFlex>
+  <mat-card fxFlex="1 1 auto">
     <mat-card-title>Kommentare</mat-card-title>
     <mat-card-content>
     </mat-card-content>

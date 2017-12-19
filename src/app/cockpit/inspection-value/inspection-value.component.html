@@ -1,5 +1,8 @@
-<p>
-
-  {{inspection.name}}: {{inspection.value}}
-</p>
-<svg></svg>
+<mat-card>
+  <mat-card-subtitle>
+    {{inspection.name}}: {{inspection.value}}
+  </mat-card-subtitle>
+  <mat-card-content #svgContainer>
+    <svg></svg>
+  </mat-card-content>
+</mat-card>
