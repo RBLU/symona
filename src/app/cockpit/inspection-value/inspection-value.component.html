@@ -5,4 +5,28 @@
   <mat-card-content #svgContainer>
     <svg></svg>
   </mat-card-content>
+  <mat-card-subtitle>
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex>
+        <div fxFlex="1 1 auto">Durchschnitt</div>
+        <div fxFlex="1 1 auto">Median</div>
+        <div fxFlex="1 1 auto">Minimal</div>
+      </div>
+      <div fxLayout="column" fxFlex>
+        <div fxFlex="1 1 auto" class="stat-field">{{(stats$ | async)?.AVERAGE}}</div>
+        <div fxFlex="1 1 auto" class="stat-field">{{(stats$ | async)?.MEDIAN}}</div>
+        <div fxFlex="1 1 auto" class="stat-field">{{(stats$ | async)?.MIN}}</div>
+      </div>
+      <div fxLayout="column" fxFlex>
+        <div fxFlex="1 1 auto">Anzahl Messungen</div>
+        <div fxFlex="1 1 auto">Std.Abw</div>
+        <div fxFlex="1 1 auto">Maximal</div>
+      </div>
+      <div fxLayout="column" fxFlex>
+        <div fxFlex="1 1 auto" class="stat-field">{{(stats$ | async)?.COUNT}}</div>
+        <div fxFlex="1 1 auto" class="stat-field">{{(stats$ | async)?.STDDEV}}</div>
+        <div fxFlex="1 1 auto" class="stat-field">{{(stats$ | async)?.MAX}}</div>
+      </div>
+    </div>
+  </mat-card-subtitle>
 </mat-card>

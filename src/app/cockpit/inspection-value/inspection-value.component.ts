@@ -1,7 +1,10 @@
-import {Component, OnInit, Input, ElementRef, OnChanges, ViewChild} from '@angular/core';
+import {Component, OnInit, Input, ElementRef, OnChanges, ViewChild, SimpleChanges} from '@angular/core';
 import {Inspection} from "../../core/models/inspection";
+import {InspectionService} from "../../core/inspection.service";
+
 import {D3Service, D3, Selection} from 'd3-ng2-service';
 import {ScaleLinear} from "d3-scale";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'inspection-value',
@@ -17,6 +20,7 @@ export class InspectionValueComponent implements OnInit, OnChanges {
   @Input() width: number = 200;
   @Input() height: number = 60;
   @ViewChild('svgContainer') svgContainer: ElementRef;
+  stats$ : Observable<any>;
 
   private d3: D3;
   private parentNativeElement: any;
@@ -24,7 +28,7 @@ export class InspectionValueComponent implements OnInit, OnChanges {
   private d3G: Selection<SVGGElement, any, null, undefined>;
   private d3CaptionG: Selection<SVGGElement, any, null, undefined>;
 
-  constructor(d3Service: D3Service) {
+  constructor(d3Service: D3Service, private inspectionService: InspectionService) {
     this.d3 = d3Service.getD3();
   }
 
@@ -49,10 +53,13 @@ export class InspectionValueComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges  ) {
     if (this.inspection && this.d3G && this.parentNativeElement) {
-      console.log('width: ' + this.parentNativeElement.clientWidth);
       this.render(this.inspection);
+    }
+
+    if (changes['inspection']) {
+      this.stats$ = this.inspectionService.getStats(this.inspection.boid);
     }
   }
 
