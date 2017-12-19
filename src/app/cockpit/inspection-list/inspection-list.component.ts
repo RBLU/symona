@@ -1,7 +1,6 @@
 import {Component, OnInit, Input, OnChanges} from '@angular/core';
 import {Inspection} from "../../core/models/inspection";
 import {MonitoringService} from "../../core/monitoring.service";
-import {ParamMap} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 
 @Component({
