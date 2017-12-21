@@ -14,6 +14,7 @@ import {Inspection} from "../../core/models/inspection";
 export class RunDetailComponent implements OnInit {
 
   run$: Observable<any>;
+  showHistoryBoid: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +27,14 @@ export class RunDetailComponent implements OnInit {
       .switchMap((params: ParamMap) => {
           return this.monitoringService.getRunById(params.get('boid'));
       });
+  }
+
+  public onShowHistory(event) {
+    this.showHistoryBoid = event.boid;
+  }
+
+  public onCloseHistory($event) {
+    this.showHistoryBoid = undefined;
   }
 
 }

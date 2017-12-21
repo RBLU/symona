@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, OnChanges} from '@angular/core';
+import {Component, OnInit, Input, OnChanges, Output, EventEmitter} from '@angular/core';
 import {Inspection} from "../../core/models/inspection";
 import {MonitoringService} from "../../core/monitoring.service";
 import {Observable} from "rxjs/Observable";
@@ -10,6 +10,7 @@ import {Observable} from "rxjs/Observable";
 })
 export class InspectionListComponent implements OnChanges {
 
+  @Output() showHistory = new EventEmitter();
   @Input() runId : string;
   inspections$: Observable<Inspection[]>;
 
@@ -22,6 +23,10 @@ export class InspectionListComponent implements OnChanges {
     if (this.runId) {
       this.inspections$ = this.monitoringService.getInspectionsForRun(this.runId);
     }
+  }
+
+  public onShowHist(event) {
+    this.showHistory.emit(event);
   }
 
 }

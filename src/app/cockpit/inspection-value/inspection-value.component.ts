@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ElementRef, OnChanges, ViewChild, SimpleChanges} from '@angular/core';
+import {Component, OnInit, Input, ElementRef, OnChanges, ViewChild, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import {Inspection} from "../../core/models/inspection";
 import {InspectionService} from "../../core/inspection.service";
 
@@ -16,6 +16,7 @@ import {Observable} from "rxjs/Observable";
 })
 export class InspectionValueComponent implements OnInit, OnChanges {
 
+  @Output() showHistory = new EventEmitter();
   @Input() inspection: Inspection;
   @Input() width: number = 200;
   @Input() height: number = 60;
@@ -66,14 +67,14 @@ export class InspectionValueComponent implements OnInit, OnChanges {
   onResize(event){
     this.width  = this.parentNativeElement.offsetWidth;
     if (this.inspection) {
-     this.resize();
+      this.d3Svg.attr('width', this.width);
+      this.d3Svg.attr('height', this.height);
+      this.render(this.inspection);
     }
   }
 
-  private resize() {
-    this.d3Svg.attr('width', this.width);
-    this.d3Svg.attr('height', this.height);
-    this.render(this.inspection);
+  public showInspectionHistory(inspection) {
+    this.showHistory.emit(inspection);
   }
 
   private render(insp: Inspection) {

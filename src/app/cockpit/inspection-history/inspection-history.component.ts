@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild, OnChanges, OnDestroy} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild, OnChanges, Output, EventEmitter} from '@angular/core';
 import {Inspection} from "../../core/models/inspection";
 import {D3, D3Service, Selection} from "d3-ng2-service";
 import {InspectionService} from "../../core/inspection.service";
@@ -11,10 +11,11 @@ import * as moment from 'moment';
 })
 export class InspectionHistoryComponent implements OnInit, OnChanges {
 
-  @Input() inspection: Inspection;
+  @Input() inspectionBoid: string;
   @Input() width: number = 200;
   @Input() height: number = 500;
   @Input() margin: number = 50;
+  @Output() close = new EventEmitter();
 
   @ViewChild('svgContainer') svgContainer: ElementRef;
 
@@ -55,9 +56,9 @@ export class InspectionHistoryComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes) {
-    if (changes['inspection'] && this.inspection) {
-      this.inspectionService.getStats(this.inspection.boid)
-        .combineLatest(this.inspectionService.getValues(this.inspection.boid))
+    if (changes['inspectionBoid'] && this.inspectionBoid) {
+      this.inspectionService.getStats(this.inspectionBoid)
+        .combineLatest(this.inspectionService.getValues(this.inspectionBoid))
         .subscribe((result) => {
           this.values = result[1];
           this.stats = result[0];
@@ -67,6 +68,9 @@ export class InspectionHistoryComponent implements OnInit, OnChanges {
 
   }
 
+  public onClose(event) {
+    this.close.emit(event);
+  }
 
   private render(values: any[], stats: any) {
     let d3 = this.d3;
@@ -175,7 +179,7 @@ export class InspectionHistoryComponent implements OnInit, OnChanges {
       .attr('y', 6)
       .attr('dy', '0.71em')
       .attr('text-anchor', 'end')
-      .text(this.inspection.name);
+      .text(stats.name);
 
     function zoomed() {
       let transform = d3.event.transform;

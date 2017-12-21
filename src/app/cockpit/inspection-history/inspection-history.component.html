@@ -1,6 +1,9 @@
 <mat-card>
-  <mat-card-subtitle>
-    History
+  <mat-card-subtitle fxLayout="row">
+    <div fxFlex="auto">History</div>
+    <button mat-mini-fab color="primary" fxFlex="0 0 auto" (click)="onClose($event)">
+      <mat-icon>cancel-</mat-icon>
+    </button>
   </mat-card-subtitle>
   <mat-card-content #svgContainer>
     <svg></svg>

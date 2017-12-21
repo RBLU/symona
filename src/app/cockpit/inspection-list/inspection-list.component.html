@@ -1,7 +1,10 @@
 <mat-card>
   <mat-card-title>Kennzahlen</mat-card-title>
   <mat-card-content fxLayout="column" *ngIf="(inspections$ | async)?.length > 0">
-    <inspection-value fxFlex="" *ngFor="let insp of inspections$ | async" [inspection]="insp"></inspection-value>
+    <inspection-value fxFlex="" *ngFor="let insp of inspections$ | async"
+                      [inspection]="insp"
+                      (showHistory)="onShowHist($event)">
+    </inspection-value>
   </mat-card-content>
   <mat-card-content fxLayout="column" *ngIf="(inspections$ | async)?.length == 0">
     <p>Richte <a routerLink="/settings">Kennzahlen</a> für dieses Monitoring ein</p>

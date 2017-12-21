@@ -5,7 +5,7 @@ import { CockpitComponent }    from './cockpit/cockpit.component';
 import {CockpitHomeComponent} from "./cockpit-home/cockpit-home.component";
 import {RunDetailComponent} from "./run-detail/run-detail.component";
 
-const heroesRoutes: Routes = [
+const cockpitRoutes: Routes = [
   { path: 'cockpit',
     component: CockpitComponent,
     children: [
@@ -21,7 +21,7 @@ const heroesRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(heroesRoutes)
+    RouterModule.forChild(cockpitRoutes)
   ],
   exports: [
     RouterModule

@@ -1,6 +1,9 @@
 <mat-card>
-  <mat-card-subtitle>
-    {{inspection.name}}: {{inspection.value  | number}}
+  <mat-card-subtitle fxLayout="row">
+    <div fxFlex="auto">{{inspection.name}}: {{inspection.value | number}}</div>
+    <button mat-mini-fab color="primary" fxFlex="0 0 auto" (click)="showInspectionHistory(inspection)">
+      <mat-icon>timeline</mat-icon>
+    </button>
   </mat-card-subtitle>
   <mat-card-content #svgContainer>
     <svg></svg>
@@ -14,8 +17,8 @@
       </div>
       <div fxLayout="column" fxFlex class="stat-values">
         <div fxFlex="1 1 auto">{{(stats$ | async)?.AVERAGE | number}}</div>
-        <div fxFlex="1 1 auto">{{(stats$ | async)?.MEDIAN  | number}}</div>
-        <div fxFlex="1 1 auto">{{(stats$ | async)?.MIN  | number}}</div>
+        <div fxFlex="1 1 auto">{{(stats$ | async)?.MEDIAN | number}}</div>
+        <div fxFlex="1 1 auto">{{(stats$ | async)?.MIN | number}}</div>
       </div>
       <div fxLayout="column" fxFlex class="stat-captions">
         <div fxFlex="1 1 auto">Anzahl Messungen</div>
@@ -23,13 +26,10 @@
         <div fxFlex="1 1 auto">Maximal</div>
       </div>
       <div fxLayout="column" fxFlex class="stat-values">
-        <div fxFlex="1 1 auto">{{(stats$ | async)?.COUNT  | number}}</div>
-        <div fxFlex="1 1 auto">{{(stats$ | async)?.STDDEV  | number}}</div>
-        <div fxFlex="1 1 auto">{{(stats$ | async)?.MAX  | number}}</div>
+        <div fxFlex="1 1 auto">{{(stats$ | async)?.COUNT | number}}</div>
+        <div fxFlex="1 1 auto">{{(stats$ | async)?.STDDEV | number}}</div>
+        <div fxFlex="1 1 auto">{{(stats$ | async)?.MAX | number}}</div>
       </div>
     </div>
   </mat-card-subtitle>
-</mat-card>
-<mat-card>
-  <inspection-history [inspection]="inspection"></inspection-history>
 </mat-card>
