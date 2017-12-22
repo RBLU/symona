@@ -9,6 +9,7 @@
 
   <mat-card fxFlex="1 1 auto">
     <inspection-history [inspectionBoid]="showHistoryBoid"
+                        [currentRunBoid]="currentRunBoid"
                         *ngIf="showHistoryBoid"
                         (close)="onCloseHistory($event)"
     ></inspection-history>

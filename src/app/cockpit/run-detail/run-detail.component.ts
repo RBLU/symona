@@ -15,6 +15,7 @@ export class RunDetailComponent implements OnInit {
 
   run$: Observable<any>;
   showHistoryBoid: string;
+  currentRunBoid: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,12 +26,17 @@ export class RunDetailComponent implements OnInit {
   ngOnInit() {
     this.run$ = this.route.paramMap
       .switchMap((params: ParamMap) => {
+          this.currentRunBoid = params.get('boid');
           return this.monitoringService.getRunById(params.get('boid'));
       });
   }
 
   public onShowHistory(event) {
-    this.showHistoryBoid = event.boid;
+    if (event.boid ==  this.showHistoryBoid) {
+      this.showHistoryBoid = undefined;
+    } else {
+      this.showHistoryBoid = event.boid;
+    }
   }
 
   public onCloseHistory($event) {

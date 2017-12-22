@@ -1,4 +1,7 @@
-import {Component, ElementRef, Input, OnInit, ViewChild, OnChanges, Output, EventEmitter} from '@angular/core';
+import {
+  Component, ElementRef, Input, OnInit, ViewChild, OnChanges, Output, EventEmitter,
+  ViewEncapsulation
+} from '@angular/core';
 import {Inspection} from "../../core/models/inspection";
 import {D3, D3Service, Selection} from "d3-ng2-service";
 import {InspectionService} from "../../core/inspection.service";
@@ -8,10 +11,12 @@ import * as moment from 'moment';
   selector: 'inspection-history',
   templateUrl: './inspection-history.component.html',
   styleUrls: ['./inspection-history.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class InspectionHistoryComponent implements OnInit, OnChanges {
 
   @Input() inspectionBoid: string;
+  @Input() currentRunBoid: string;
   @Input() width: number = 200;
   @Input() height: number = 500;
   @Input() margin: number = 50;
@@ -36,7 +41,7 @@ export class InspectionHistoryComponent implements OnInit, OnChanges {
     this.parentNativeElement = this.svgContainer.nativeElement;
 
     if (this.parentNativeElement !== null) {
-      this.width  = this.parentNativeElement.offsetWidth;
+      this.width = this.parentNativeElement.offsetWidth;
       d3ParentElement = d3.select(this.parentNativeElement);
 
       this.d3Svg = d3ParentElement.select<SVGSVGElement>('svg');
@@ -126,35 +131,35 @@ export class InspectionHistoryComponent implements OnInit, OnChanges {
       .attr('width', this.width)
       .attr('y', height - yScaleRects(stats.levelLowError))
       .attr('height', Math.max(0, yScaleRects(stats.levelLowError)))
-      .attr('class', 'error');
+      .attr('class', 'graph error');
 
     levels.append('rect')
       .attr('x', 0)
       .attr('width', width)
       .attr('y', height - yScaleRects(stats.levelLowWarning))
       .attr('height', Math.max(0, yScaleRects(stats.levelLowWarning) - yScaleRects(stats.levelLowError)))
-      .attr('class', 'warning');
+      .attr('class', 'graph warning');
 
     levels.append('rect')
       .attr('x', 0)
       .attr('width', width)
       .attr('y', height - yScaleRects(stats.levelHighWarning))
       .attr('height', yScaleRects(stats.levelHighWarning) - Math.max(0, yScaleRects(stats.levelLowWarning)))
-      .attr('class', 'normal');
+      .attr('class', 'graph normal');
 
     levels.append('rect')
       .attr('x', 0)
       .attr('width', width)
       .attr('y', height - yScaleRects(stats.levelHighError))
       .attr('height', yScaleRects(stats.levelHighError) - yScaleRects(stats.levelHighWarning))
-      .attr('class', 'warning');
+      .attr('class', 'graph warning');
 
     levels.append('rect')
       .attr('x', 0)
       .attr('width', width)
       .attr('y', 0)
       .attr('height', height - Math.min(height, yScaleRects(stats.levelHighError)))
-      .attr('class', 'error');
+      .attr('class', 'graph error');
 
     let xAxis =
       d3.axisBottom(xScale)
@@ -214,8 +219,9 @@ export class InspectionHistoryComponent implements OnInit, OnChanges {
       .data(values)
       .enter()
         .append('circle')
-        .attr('class', 'dot')
-        .attr('r', 5)
+        .attr('class', (d) => (this.currentRunBoid && (this.currentRunBoid == d.runBoid)) ? 'dot current' : 'dot')
+        .attr('r', (d) => (this.currentRunBoid && (this.currentRunBoid == d.runBoid)) ? 8 : 3)
+
         .attr('cx', (d) => {
           return xScale(new Date(d.started));
         })

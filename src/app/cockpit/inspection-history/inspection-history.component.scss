@@ -1,0 +1,12 @@
+rect.graph {
+  fill-opacity: 0.7;
+}
+$color12: #2dd2ef; 		// medium blue
+
+.dot {
+  cursor: pointer;
+  &.current {
+    fill: $color12;
+  }
+}
+
