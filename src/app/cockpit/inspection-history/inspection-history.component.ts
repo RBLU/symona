@@ -6,6 +6,7 @@ import {Inspection} from "../../core/models/inspection";
 import {D3, D3Service, Selection} from "d3-ng2-service";
 import {InspectionService} from "../../core/inspection.service";
 import * as moment from 'moment';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'inspection-history',
@@ -31,7 +32,7 @@ export class InspectionHistoryComponent implements OnInit, OnChanges {
   private values: any;
   private stats: any;
 
-  constructor(d3Service: D3Service, private inspectionService: InspectionService) {
+  constructor(d3Service: D3Service, private inspectionService: InspectionService, private router: Router) {
     this.d3 = d3Service.getD3();
   }
 
@@ -218,21 +219,24 @@ export class InspectionHistoryComponent implements OnInit, OnChanges {
       .selectAll('.dot')
       .data(values)
       .enter()
-        .append('circle')
-        .attr('class', (d) => (this.currentRunBoid && (this.currentRunBoid == d.runBoid)) ? 'dot current' : 'dot')
-        .attr('r', (d) => (this.currentRunBoid && (this.currentRunBoid == d.runBoid)) ? 8 : 3)
+      .append('circle')
+      .attr('class', (d) => (this.currentRunBoid && (this.currentRunBoid == d.runBoid)) ? 'dot current' : 'dot')
+      .attr('r', (d) => (this.currentRunBoid && (this.currentRunBoid == d.runBoid)) ? 8 : 3)
 
-        .attr('cx', (d) => {
-          return xScale(new Date(d.started));
-        })
-        .attr('cy', (d) => {
-         return yScale(new Date(+d.value));
-        })
-        .append("svg:title")
-          .text(d => moment(d.started).format('LLL') + ': ' + d.value)
-          .on('click', function (d) {
-           // $scope.$root.$state.go('batches', {batchId: d.ITSBATCHCONFIG, runId: d.ITSBATCHRUN});
-          });
+      .attr('cx', (d) => {
+        return xScale(new Date(d.started));
+      })
+      .attr('cy', (d) => {
+        return yScale(new Date(+d.value));
+      })
+      .on('click', (d) => {
+        this.currentRunBoid = d.runBoid;
+        this.router.navigate(['/cockpit/' + d.runBoid]);
+        this.currentRunBoid = d.runBoid;
+        this.render(this.values, this.stats);
+      })
+      .append("svg:title")
+       .text(d => moment(d.started).format('LLL') + ': ' + d.value)
 
     viewport.call(zoom);
   }
