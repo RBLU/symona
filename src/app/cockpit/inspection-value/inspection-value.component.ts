@@ -1,4 +1,14 @@
-import {Component, OnInit, Input, ElementRef, OnChanges, ViewChild, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ElementRef,
+  OnChanges,
+  ViewChild,
+  SimpleChanges,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import {Inspection} from "../../core/models/inspection";
 import {InspectionService} from "../../core/inspection.service";
 
@@ -21,13 +31,14 @@ export class InspectionValueComponent implements OnInit, OnChanges {
   @Input() width: number = 200;
   @Input() height: number = 60;
   @ViewChild('svgContainer') svgContainer: ElementRef;
-  stats$ : Observable<any>;
+  stats$: Observable<any>;
 
   private d3: D3;
   private parentNativeElement: any;
   private d3Svg: Selection<SVGSVGElement, any, null, undefined>;
   private d3G: Selection<SVGGElement, any, null, undefined>;
   private d3CaptionG: Selection<SVGGElement, any, null, undefined>;
+  private x: ScaleLinear<number, number>;
 
   constructor(d3Service: D3Service, private inspectionService: InspectionService) {
     this.d3 = d3Service.getD3();
@@ -39,7 +50,7 @@ export class InspectionValueComponent implements OnInit, OnChanges {
     this.parentNativeElement = this.svgContainer.nativeElement;
 
     if (this.parentNativeElement !== null) {
-      this.width  = this.parentNativeElement.offsetWidth;
+      this.width = this.parentNativeElement.offsetWidth;
       d3ParentElement = d3.select(this.parentNativeElement);
 
       this.d3Svg = d3ParentElement.select<SVGSVGElement>('svg');
@@ -54,18 +65,27 @@ export class InspectionValueComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges  ) {
+  ngOnChanges(changes: SimpleChanges) {
     if (this.inspection && this.d3G && this.parentNativeElement) {
       this.render(this.inspection);
     }
 
     if (changes['inspection']) {
       this.stats$ = this.inspectionService.getStats(this.inspection.boid);
+      this.stats$.subscribe((stats) => {
+        this.d3G
+          .append('line')
+          .attr('x1', this.x(stats.AVERAGE))
+          .attr('y1', this.height / 2 + 5)
+          .attr('x2', this.x(stats.AVERAGE))
+          .attr('y2', this.height / 2 - 5);
+
+      });
     }
   }
 
-  onResize(event){
-    this.width  = this.parentNativeElement.offsetWidth;
+  onResize(event) {
+    this.width = this.parentNativeElement.offsetWidth;
     if (this.inspection) {
       this.d3Svg.attr('width', this.width);
       this.d3Svg.attr('height', this.height);
@@ -82,7 +102,7 @@ export class InspectionValueComponent implements OnInit, OnChanges {
     let d3G = this.d3G;
 
     d3G.selectAll('.settings').remove();
-    const x: ScaleLinear<number, number> =
+    let x = this.x =
       d3.scaleLinear()
         .domain([insp.levelMin, insp.levelMax])
         .range([0, this.width]);
@@ -95,18 +115,18 @@ export class InspectionValueComponent implements OnInit, OnChanges {
         .attr('x', x(left))
         .attr('y', 0)
         .attr('width', x(right) - x(left))
-        .attr('height', this.height/3);
+        .attr('height', this.height / 3);
     };
 
     const drawCaption = (xPos: number, caption?: string) => {
       if (!caption) {
-        caption = ''+xPos;
+        caption = '' + xPos;
       }
       this.d3CaptionG
         .append('text')
         .attr('class', 'settings')
         .text(caption)
-        .attr("transform", "translate("+x(xPos)+","+this.height/2 +")rotate(-45)")
+        .attr("transform", "translate(" + x(xPos) + "," + this.height / 2 + ")rotate(-45)")
         .attr('text-anchor', 'end');
     };
 
@@ -119,7 +139,7 @@ export class InspectionValueComponent implements OnInit, OnChanges {
 
     // draw the captions on the x axis
 
-    drawCaption( insp.levelMin);
+    drawCaption(insp.levelMin);
     drawCaption(insp.levelLowError);
     drawCaption(insp.levelLowWarning);
     drawCaption(insp.levelHighWarning);
@@ -129,9 +149,10 @@ export class InspectionValueComponent implements OnInit, OnChanges {
     // draw the dot
     d3G.append('circle')
       .attr('cx', x(Math.min(Math.max(insp.value, insp.levelMin), insp.levelMax)))
-      .attr('cy', this.height/6)
-      .attr('r', this.height/12)
+      .attr('cy', this.height / 6)
+      .attr('r', this.height / 12)
       .attr('fill', 'blue')
+
   }
 
 
