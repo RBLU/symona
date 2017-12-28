@@ -73,12 +73,25 @@ export class InspectionValueComponent implements OnInit, OnChanges {
     if (changes['inspection']) {
       this.stats$ = this.inspectionService.getStats(this.inspection.boid);
       this.stats$.subscribe((stats) => {
+
+        // draw a small black bar for the average
         this.d3G
           .append('line')
           .attr('x1', this.x(stats.AVERAGE))
-          .attr('y1', this.height / 2 + 5)
+          .attr('y1', 0 + 3)
           .attr('x2', this.x(stats.AVERAGE))
-          .attr('y2', this.height / 2 - 5);
+          .attr('y2', this.height/3 -3)
+          .attr('style', 'stroke:rgb(0,0,0);stroke-width:2');
+
+        // draw a small black bar for the std-dev
+        this.d3G
+          .append('line')
+          .attr('x1', this.x(stats.AVERAGE - stats.STDDEV))
+          .attr('y1', this.height/6)
+          .attr('x2', this.x(stats.AVERAGE +  stats.STDDEV))
+          .attr('y2', this.height/6)
+          .attr('style', 'stroke:rgb(0,0,0);stroke-width:2');
+
 
       });
     }
