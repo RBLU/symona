@@ -4,6 +4,7 @@ import {Run} from "./models/run";
 import {Observable} from "rxjs/Rx";
 import * as moment from 'moment';
 import {Inspection} from "./models/inspection";
+import {Monitoring} from "./models/monitoring";
 
 const QUERY_SEPARATOR = "|";
 
@@ -43,4 +44,11 @@ export class MonitoringService {
     return this.http.get<Inspection[]>('/runs/' + boid + '/inspections');
   }
 
+  getMonitorings() {
+    return this.http.get<Monitoring[]>('/monitorings?expand=itsTarget');
+  }
+
+  getMonitoringById(boid: string | null) {
+    return this.http.get<Monitoring>('/monitorings/' + boid + '?expand=itsTarget');
+  }
 }

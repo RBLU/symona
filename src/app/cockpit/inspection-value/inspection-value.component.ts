@@ -91,8 +91,6 @@ export class InspectionValueComponent implements OnInit, OnChanges {
           .attr('x2', this.x(stats.AVERAGE +  stats.STDDEV))
           .attr('y2', this.height/6)
           .attr('style', 'stroke:rgb(0,0,0);stroke-width:2');
-
-
       });
     }
   }

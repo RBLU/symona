@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MonitoringService} from "../../core/monitoring.service";
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  public monitorings$: any;
+
+  constructor(
+    private monitoringService: MonitoringService
+  ) { }
 
   ngOnInit() {
+    this.monitorings$ = this.monitoringService.getMonitorings();
   }
 
 }
