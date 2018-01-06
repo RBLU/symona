@@ -1,6 +1,36 @@
-<p>
-  monitoring-detail works!
-</p>
-<pre>
-  {{monitoring$ | async | json}}
-</pre>
+<mat-toolbar>
+  <h2>{{monitoring?.name}}</h2>
+</mat-toolbar>
+<div fxLayout="row">
+
+<mat-card fxFlex="50%">
+  <form *ngIf="monitoring" fxLayout="column">
+    <mat-form-field fxFlex="">
+      <input matInput type="text" id="name" [(ngModel)]="monitoring.name" placeholder="name" name="name">
+    </mat-form-field>
+    <mat-form-field fxFlex="">
+      <input matInput type="text" id="description" [(ngModel)]="monitoring.description" placeholder="description"
+             name="description">
+    </mat-form-field>
+    <div fxFlex="">
+      <mat-datepicker-toggle [for]="fromDatepicker"></mat-datepicker-toggle>
+      <mat-form-field>
+        <input matInput [matDatepicker]="fromDatepicker" [(ngModel)]="monitoring.fromDate" placeholder="Von Datum"
+               name="fromDate">
+        <mat-datepicker #fromDatepicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div fxFlex="">
+      <mat-datepicker-toggle [for]="toDatepicker"></mat-datepicker-toggle>
+      <mat-form-field fxFlex="">
+        <input matInput [matDatepicker]="toDatepicker" [(ngModel)]="monitoring.toDate" placeholder="Bis Datum"
+               name="toDate">
+        <mat-datepicker #toDatepicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-card>
+<mat-card fxFlex="50%">
+
+</mat-card>
+</div>

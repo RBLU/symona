@@ -11,7 +11,7 @@ import {Monitoring} from "../../core/models/monitoring";
 })
 export class MonitoringDetailComponent implements OnInit {
 
-  monitoring$: Observable<Monitoring>;
+  monitoring: Monitoring;
   currentMonitoringBoid: string;
 
   constructor(
@@ -21,11 +21,13 @@ export class MonitoringDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.monitoring$ = this.route.paramMap
+    this.route.paramMap
       .switchMap((params: ParamMap) => {
         this.currentMonitoringBoid = params.get('boid');
         return this.monitoringService.getMonitoringById(params.get('boid'));
-      });
+      }).subscribe((nextVal) => {
+        this.monitoring = nextVal;
+    })
   }
 
 }

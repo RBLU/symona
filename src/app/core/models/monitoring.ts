@@ -1,3 +1,5 @@
+import {Target} from "./target";
+
 export class Monitoring {
 
   constructor(
@@ -8,6 +10,6 @@ export class Monitoring {
     public fromDate: Date,
     public toDate: Date,
     public active?: boolean,
-    public target?: any,
+    public target?: Target,
   ) { }
 }
