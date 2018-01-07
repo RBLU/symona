@@ -29,8 +29,17 @@
       </mat-form-field>
     </div>
   </form>
+  <button mat-raised-button color="primary" (click)="reloadRuns()">Reload Runs</button>
+  <p>Runs: {{(loadedRunCount$ | async)?.created}}</p>
 </mat-card>
 <mat-card fxFlex="50%">
-
+  <mat-list>
+    <mat-list-item *ngFor="let insp of inspections$ | async">
+      <mat-icon matListIcon>lightbulb_outline</mat-icon>
+      <h3 matLine>{{insp.name}}</h3>
+      <p matLine>whatever else</p>
+      <button mat-raised-button (click)="recalcInsp(insp.boid)">recalc</button>
+      </mat-list-item>
+  </mat-list>
 </mat-card>
 </div>

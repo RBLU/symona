@@ -51,4 +51,18 @@ export class MonitoringService {
   getMonitoringById(boid: string | null) {
     return this.http.get<Monitoring>('/monitorings/' + boid + '?expand=itsTarget');
   }
+
+  reloadRuns(boid: string): Observable<any> {
+    return  this.http.post<{ created: number; }>('/monitorings/' + boid + '/reloadruns', null);
+  }
+
+  getInspectionsForMonitoring(boid: string): Observable<Inspection[]> {
+    return this.http.get<Inspection[]>('/inspections?filter=itsMonitoring' + QUERY_SEPARATOR + 'eq' + QUERY_SEPARATOR+ boid
+      + '&expand=itsInspectionDef');
+  }
+
+  recalcInspection(boid: string): Observable<any> {
+    console.log('initiating http call for recalc: ' + boid);
+    return  this.http.post<any>('/inspections/' + boid + '/recalc', null)
+  }
 }
