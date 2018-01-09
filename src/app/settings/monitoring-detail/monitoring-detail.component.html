@@ -1,45 +1,63 @@
-<mat-toolbar>
-  <h2>{{monitoring?.name}}</h2>
-</mat-toolbar>
-<div fxLayout="row">
+<div *ngIf="monitoring; else loading">
 
-<mat-card fxFlex="50%">
-  <form *ngIf="monitoring" fxLayout="column">
-    <mat-form-field fxFlex="">
-      <input matInput type="text" id="name" [(ngModel)]="monitoring.name" placeholder="name" name="name">
-    </mat-form-field>
-    <mat-form-field fxFlex="">
-      <input matInput type="text" id="description" [(ngModel)]="monitoring.description" placeholder="description"
-             name="description">
-    </mat-form-field>
-    <div fxFlex="">
-      <mat-datepicker-toggle [for]="fromDatepicker"></mat-datepicker-toggle>
-      <mat-form-field>
-        <input matInput [matDatepicker]="fromDatepicker" [(ngModel)]="monitoring.fromDate" placeholder="Von Datum"
-               name="fromDate">
-        <mat-datepicker #fromDatepicker></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <div fxFlex="">
-      <mat-datepicker-toggle [for]="toDatepicker"></mat-datepicker-toggle>
-      <mat-form-field fxFlex="">
-        <input matInput [matDatepicker]="toDatepicker" [(ngModel)]="monitoring.toDate" placeholder="Bis Datum"
-               name="toDate">
-        <mat-datepicker #toDatepicker></mat-datepicker>
-      </mat-form-field>
-    </div>
-  </form>
-  <button mat-raised-button color="primary" (click)="reloadRuns()">Reload Runs</button>
-  <p>Runs: {{(loadedRunCount$ | async)?.created}}</p>
-</mat-card>
-<mat-card fxFlex="50%">
-  <mat-list>
-    <mat-list-item *ngFor="let insp of inspections$ | async">
-      <mat-icon matListIcon>lightbulb_outline</mat-icon>
-      <h3 matLine>{{insp.name}}</h3>
-      <p matLine>whatever else</p>
-      <button mat-raised-button (click)="recalcInsp(insp.boid)">recalc</button>
-      </mat-list-item>
-  </mat-list>
-</mat-card>
+  <mat-toolbar>
+    <h2>{{monitoring.name}}</h2>
+  </mat-toolbar>
+  <div fxLayout="row">
+
+    <mat-card fxFlex="50%">
+      <form fxLayout="column">
+        <mat-form-field fxFlex="">
+          <input matInput type="text" id="name" [(ngModel)]="monitoring.name" placeholder="name" name="name">
+        </mat-form-field>
+        <mat-form-field fxFlex="">
+          <input matInput type="text" id="description" [(ngModel)]="monitoring.description" placeholder="description"
+                 name="description">
+        </mat-form-field>
+        <div fxFlex="">
+          <mat-datepicker-toggle [for]="fromDatepicker"></mat-datepicker-toggle>
+          <mat-form-field>
+            <input matInput [matDatepicker]="fromDatepicker" [(ngModel)]="monitoring.fromDate" placeholder="Von Datum"
+                   name="fromDate">
+            <mat-datepicker #fromDatepicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div fxFlex="">
+          <mat-datepicker-toggle [for]="toDatepicker"></mat-datepicker-toggle>
+          <mat-form-field fxFlex="">
+            <input matInput [matDatepicker]="toDatepicker" [(ngModel)]="monitoring.toDate" placeholder="Bis Datum"
+                   name="toDate">
+            <mat-datepicker #toDatepicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div fxFlex="">
+          Target: <mat-form-field>
+            <input matInput [(ngModel)]="selectedTargetTitle"
+                   (ngModelChange)="onChange($event)"
+                   name="itsTarget" [matAutocomplete]="auto" (keyup)="filter($event.target.value)">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let target of filteredTargets" [value]="target">
+                {{ target }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </form>
+      <button mat-raised-button color="primary" (click)="reloadRuns()">Reload Runs</button>
+      <p>Runs: {{(loadedRunCount$ | async)?.created}}</p>
+    </mat-card>
+    <mat-card fxFlex="50%">
+      <mat-list>
+        <mat-list-item *ngFor="let insp of inspections$ | async">
+          <mat-icon matListIcon>lightbulb_outline</mat-icon>
+          <h3 matLine>{{insp.name}}</h3>
+          <p matLine>whatever else</p>
+          <button mat-raised-button (click)="recalcInsp(insp.boid)">recalc</button>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
 </div>
+<ng-template #loading>
+  <mat-progress-spinner [diameter]="100"></mat-progress-spinner>
+</ng-template>

@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Rx";
 import * as moment from 'moment';
 import {Inspection} from "./models/inspection";
 import {Monitoring} from "./models/monitoring";
+import {Target} from "./models/target";
 
 const QUERY_SEPARATOR = "|";
 
@@ -64,5 +65,9 @@ export class MonitoringService {
   recalcInspection(boid: string): Observable<any> {
     console.log('initiating http call for recalc: ' + boid);
     return  this.http.post<any>('/inspections/' + boid + '/recalc', null)
+  }
+
+  getTargets() {
+    return this.http.get<Target[]>('/targets');
   }
 }
