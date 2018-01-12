@@ -1,4 +1,4 @@
-<div fxLayout="row">
+<div fxLayout="row" [ngClass]="{'ignored': run.ignored == 1}">
   <div fxFlex="0 0 auto">
     <mat-icon [ngClass]="run.runStatus">{{getRunIcon()}}</mat-icon>
   </div>
