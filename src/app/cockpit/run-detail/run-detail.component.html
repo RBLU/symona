@@ -1,21 +1,25 @@
-<mat-toolbar>
+<div *ngIf="run$ | async as run">
+  <mat-toolbar>
 
-  {{(run$ | async)?.monitoring.name}} Start: {{(run$ | async)?.started | date:'medium'}}
+    {{run.monitoring.name}} Start: {{run.started | date:'medium'}}
+    <mat-slide-toggle (change)="onIgnoreChange($event)" [checked]="run.ignored == 1">Ignorieren</mat-slide-toggle>
 
-</mat-toolbar>
-<div fxLayout="row">
-  <inspection-list fxFlex="1 1 50%" [runId]="(run$ | async)?.boid"
-                   (showHistory)="onShowHistory($event)"></inspection-list>
+  </mat-toolbar>
+  <div fxLayout="row">
+    <inspection-list fxFlex="1 1 50%" [runId]="run.boid"
+                     (showHistory)="onShowHistory($event)"></inspection-list>
 
-  <mat-card fxFlex="1 1 auto">
-    <inspection-history [inspectionBoid]="showHistoryBoid"
-                        [currentRunBoid]="currentRunBoid"
-                        *ngIf="showHistoryBoid"
-                        (close)="onCloseHistory($event)"
-    ></inspection-history>
+    <mat-card fxFlex="1 1 auto">
+      <inspection-history [inspectionBoid]="showHistoryBoid"
+                          [currentRunBoid]="currentRunBoid"
+                          *ngIf="showHistoryBoid"
+                          (close)="onCloseHistory($event)"
+      ></inspection-history>
 
-    <mat-card-title>Kommentare</mat-card-title>
-    <mat-card-content>
-    </mat-card-content>
-  </mat-card>
+      <mat-card-title>Kommentare</mat-card-title>
+      <mat-card-content>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
 </div>

@@ -71,7 +71,7 @@ export class InspectionValueComponent implements OnInit, OnChanges {
     }
 
     if (changes['inspection']) {
-      this.stats$ = this.inspectionService.getStats(this.inspection.boid);
+      this.stats$ = this.inspectionService.getStats(this.inspection.boid).share();
       this.stats$.subscribe((stats) => {
 
         // draw a small black bar for the average

@@ -1,12 +1,12 @@
-<mat-card>
+<mat-card *ngIf="inspections$ | async as inspections">
   <mat-card-title>Kennzahlen</mat-card-title>
-  <mat-card-content fxLayout="column" *ngIf="(inspections$ | async)?.length > 0">
-    <inspection-value fxFlex="" *ngFor="let insp of inspections$ | async"
+  <mat-card-content fxLayout="column" *ngIf="inspections.length > 0">
+    <inspection-value fxFlex="" *ngFor="let insp of inspections"
                       [inspection]="insp"
                       (showHistory)="onShowHist($event)">
     </inspection-value>
   </mat-card-content>
-  <mat-card-content fxLayout="column" *ngIf="(inspections$ | async)?.length == 0">
+  <mat-card-content fxLayout="column" *ngIf="inspections.length == 0">
     <p>Richte <a routerLink="/settings">Kennzahlen</a> für dieses Monitoring ein</p>
   </mat-card-content>
 </mat-card>

@@ -19,8 +19,8 @@ export class InspectionListComponent implements OnChanges {
     private monitoringService: MonitoringService
   ) { }
 
-  ngOnChanges() {
-    if (this.runId) {
+  ngOnChanges(changes) {
+    if (changes.runId && changes.runId.currentValue !== changes.runId.previousValue) {
       this.inspections$ = this.monitoringService.getInspectionsForRun(this.runId);
     }
   }

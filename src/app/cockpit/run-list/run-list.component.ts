@@ -27,7 +27,7 @@ export class RunListComponent implements AfterViewInit{
   }
 
   ngAfterViewInit() {
-    this.runs$ = Observable.timer(0, 10000)
+    this.runs$ = Observable.timer(0, 60*60000)
       .combineLatest(
         this.monFilterCtrl.valueChanges.startWith('').distinctUntilChanged(),
         this.statusFilter$.startWith('').distinctUntilChanged(),

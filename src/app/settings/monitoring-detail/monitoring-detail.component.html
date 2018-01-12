@@ -31,7 +31,8 @@
           </mat-form-field>
         </div>
         <div fxFlex="">
-          Target: <mat-form-field>
+          Target:
+          <mat-form-field>
             <input matInput [(ngModel)]="selectedTargetTitle"
                    (ngModelChange)="onChange($event)"
                    name="itsTarget" [matAutocomplete]="auto" (keyup)="filter($event.target.value)">

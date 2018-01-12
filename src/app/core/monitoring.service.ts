@@ -70,4 +70,8 @@ export class MonitoringService {
   getTargets() {
     return this.http.get<Target[]>('/targets');
   }
+
+  ignoreRun(runBoid: string, doIgnore: boolean) {
+    return this.http.post<any>('/runs/' + runBoid +  (doIgnore ?'/ignore': '/unignore'), null );
+  }
 }

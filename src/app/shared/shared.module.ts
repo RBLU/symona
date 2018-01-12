@@ -6,7 +6,8 @@ import {
   MatButtonModule, MatIconModule, MatListModule, MatToolbarModule, MatChipsModule,
   MatMenuModule,
   MatAutocompleteModule,
-  MatInputModule, MatDatepickerModule, MatPaginatorModule, MatCardModule, MatSelectModule, MatProgressSpinnerModule
+  MatInputModule, MatDatepickerModule, MatPaginatorModule, MatCardModule, MatSelectModule, MatProgressSpinnerModule,
+  MatSlideToggleModule
 } from '@angular/material';
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 
@@ -31,6 +32,7 @@ import {MatMomentDateModule} from "@angular/material-moment-adapter";
     MatProgressSpinnerModule,
     MatInputModule,
     MatSelectModule,
+    MatSlideToggleModule,
     MatDatepickerModule,
     MatMomentDateModule,
     MatPaginatorModule,

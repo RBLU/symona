@@ -64,10 +64,9 @@ export class MonitoringDetailComponent implements OnInit {
     if (this.targets && Array.isArray(this.targets)) {
       let foundTarget = this.targets.find((target) => target.title == text);
       if (foundTarget) {
-
+        this.monitoring.itsTarget = foundTarget.boid;
+        this.monitoring.target = foundTarget;
       }
-
-
     }
   }
 
