@@ -10,7 +10,7 @@ export class Run {
     public operatorStatus: string,
     public started: Date,
     public ended: Date,
-    public ignored: boolean,
+    public ignored: number,
     public created_at: Date,
     public updated_at: Date,
     public inspections?: Inspection[]

@@ -1,9 +1,6 @@
 <mat-card>
   <mat-card-subtitle fxLayout="row">
     <div fxFlex="auto">{{inspection.name}}: {{inspection.value | number}}</div>
-    <button mat-mini-fab color="primary" fxFlex="0 0 auto" (click)="showInspectionHistory(inspection)">
-      <mat-icon>timeline</mat-icon>
-    </button>
   </mat-card-subtitle>
   <mat-card-content #svgContainer>
     <svg></svg>
@@ -32,4 +29,19 @@
       </div>
     </div>
   </mat-card-subtitle>
+  <mat-expansion-panel (opened)="historyOpen=true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>timeline</mat-icon>
+      </mat-panel-title>
+      <mat-panel-description>
+        Verlauf
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <inspection-history *ngIf="historyOpen"
+                        [inspectionBoid]="inspection.boid"
+                        [currentRunBoid]="inspection.itsRun"
+    ></inspection-history>
+  </mat-expansion-panel>
 </mat-card>

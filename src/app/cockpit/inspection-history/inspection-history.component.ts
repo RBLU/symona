@@ -19,9 +19,8 @@ export class InspectionHistoryComponent implements OnInit, OnChanges {
   @Input() inspectionBoid: string;
   @Input() currentRunBoid: string;
   @Input() width: number = 200;
-  @Input() height: number = 500;
+  @Input() height: number = 200;
   @Input() margin: number = 50;
-  @Output() close = new EventEmitter();
 
   @ViewChild('svgContainer') svgContainer: ElementRef;
 
@@ -72,10 +71,6 @@ export class InspectionHistoryComponent implements OnInit, OnChanges {
         })
     }
 
-  }
-
-  public onClose(event) {
-    this.close.emit(event);
   }
 
   private render(values: any[], stats: any) {

@@ -26,12 +26,12 @@ import {Observable} from "rxjs/Observable";
 })
 export class InspectionValueComponent implements OnInit, OnChanges {
 
-  @Output() showHistory = new EventEmitter();
   @Input() inspection: Inspection;
   @Input() width: number = 200;
   @Input() height: number = 60;
   @ViewChild('svgContainer') svgContainer: ElementRef;
   stats$: Observable<any>;
+  public historyOpen = false;
 
   private d3: D3;
   private parentNativeElement: any;
@@ -39,6 +39,7 @@ export class InspectionValueComponent implements OnInit, OnChanges {
   private d3G: Selection<SVGGElement, any, null, undefined>;
   private d3CaptionG: Selection<SVGGElement, any, null, undefined>;
   private x: ScaleLinear<number, number>;
+
 
   constructor(d3Service: D3Service, private inspectionService: InspectionService) {
     this.d3 = d3Service.getD3();
@@ -105,7 +106,7 @@ export class InspectionValueComponent implements OnInit, OnChanges {
   }
 
   public showInspectionHistory(inspection) {
-    this.showHistory.emit(inspection);
+    //this.showHistory.emit(inspection);
   }
 
   private render(insp: Inspection) {
