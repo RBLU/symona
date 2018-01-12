@@ -1,7 +1,7 @@
 <mat-card>
-  <mat-card-subtitle fxLayout="row">
-    <div fxFlex="auto">{{inspection.name}}: {{inspection.value | number}}</div>
-  </mat-card-subtitle>
+  <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
+    <div fxFlex="50%">{{inspection.name}}</div><div fxFlex="0 1 auto"> {{inspection.value | formatvalue:inspection.inspectionDef.formatValue}}</div>
+  </mat-card-title>
   <mat-card-content #svgContainer>
     <svg></svg>
   </mat-card-content>

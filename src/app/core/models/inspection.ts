@@ -18,6 +18,7 @@ export class Inspection {
     public itsRun?: string,
     public value?: number,
     public status?: string,
-    public ignore?: boolean
+    public ignore?: boolean,
+    public inspectionDef?: any
   ) { }
 }

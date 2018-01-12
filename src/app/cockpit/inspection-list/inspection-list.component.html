@@ -1,5 +1,4 @@
 <mat-card *ngIf="inspections$ | async as inspections">
-  <mat-card-title>Kennzahlen</mat-card-title>
   <mat-card-content fxLayout="column" *ngIf="inspections.length > 0">
     <inspection-value fxFlex="" *ngFor="let insp of inspections"
                       [inspection]="insp"

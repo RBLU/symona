@@ -10,17 +10,21 @@ import {
   MatSlideToggleModule, MatExpansionModule
 } from '@angular/material';
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
+import {FormatValuePipe} from "./formatValue.pipe";
 
 @NgModule({
   imports: [
     CommonModule,
   ],
-  declarations: [],
+  declarations: [
+    FormatValuePipe
+  ],
   providers: [],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    FormatValuePipe,
 
     MatListModule,
     MatIconModule,
