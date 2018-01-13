@@ -1,47 +1,59 @@
 <mat-card>
   <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
-    <div fxFlex="50%">{{inspection.name}}</div><div fxFlex="0 1 auto"> {{inspection.value | formatvalue:inspection.inspectionDef.formatValue}}</div>
+    <div fxFlex="50%">{{inspection.name}}</div>
+    <div fxFlex="0 1 auto"> {{inspection.value | formatvalue:inspection.inspectionDef.formatValue}}</div>
   </mat-card-title>
   <mat-card-content #svgContainer>
     <svg></svg>
   </mat-card-content>
-  <mat-card-subtitle *ngIf="stats$ | async as stats">
-    <div fxLayout="row">
-      <div fxLayout="column" fxFlex class="stat-captions">
-        <div fxFlex="1 1 auto">Durchschnitt</div>
-        <div fxFlex="1 1 auto">Median</div>
-        <div fxFlex="1 1 auto">Minimal</div>
-      </div>
-      <div fxLayout="column" fxFlex class="stat-values">
-        <div fxFlex="1 1 auto">{{stats.AVERAGE | number}}</div>
-        <div fxFlex="1 1 auto">{{stats.MEDIAN | number}}</div>
-        <div fxFlex="1 1 auto">{{stats.MIN | number}}</div>
-      </div>
-      <div fxLayout="column" fxFlex class="stat-captions">
-        <div fxFlex="1 1 auto">Anzahl Messungen</div>
-        <div fxFlex="1 1 auto">Std.Abw</div>
-        <div fxFlex="1 1 auto">Maximal</div>
-      </div>
-      <div fxLayout="column" fxFlex class="stat-values">
-        <div fxFlex="1 1 auto">{{stats.COUNT | number}}</div>
-        <div fxFlex="1 1 auto">{{stats.STDDEV | number}}</div>
-        <div fxFlex="1 1 auto">{{stats.MAX | number}}</div>
-      </div>
-    </div>
-  </mat-card-subtitle>
-  <mat-expansion-panel (opened)="historyOpen=true">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-icon>timeline</mat-icon>
-      </mat-panel-title>
-      <mat-panel-description>
-        Verlauf
-      </mat-panel-description>
-    </mat-expansion-panel-header>
 
-    <inspection-history *ngIf="historyOpen"
-                        [inspectionBoid]="inspection.boid"
-                        [currentRunBoid]="inspection.itsRun"
-    ></inspection-history>
-  </mat-expansion-panel>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>poll</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          Satistiken
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div fxLayout="row" *ngIf="stats$ | async as stats">
+        <div fxLayout="column" fxFlex class="stat-captions">
+          <div fxFlex="1 1 auto">Durchschnitt</div>
+          <div fxFlex="1 1 auto">Median</div>
+          <div fxFlex="1 1 auto">Minimal</div>
+        </div>
+        <div fxLayout="column" fxFlex class="stat-values">
+          <div fxFlex="1 1 auto">{{stats.AVERAGE | number}}</div>
+          <div fxFlex="1 1 auto">{{stats.MEDIAN | number}}</div>
+          <div fxFlex="1 1 auto">{{stats.MIN | number}}</div>
+        </div>
+        <div fxLayout="column" fxFlex class="stat-captions">
+          <div fxFlex="1 1 auto">Anzahl Messungen</div>
+          <div fxFlex="1 1 auto">Std.Abw</div>
+          <div fxFlex="1 1 auto">Maximal</div>
+        </div>
+        <div fxLayout="column" fxFlex class="stat-values">
+          <div fxFlex="1 1 auto">{{stats.COUNT | number}}</div>
+          <div fxFlex="1 1 auto">{{stats.STDDEV | number}}</div>
+          <div fxFlex="1 1 auto">{{stats.MAX | number}}</div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="historyOpen=true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>timeline</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          Verlauf
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <inspection-history *ngIf="historyOpen"
+                          [inspectionBoid]="inspection.boid"
+                          [currentRunBoid]="inspection.itsRun"
+      ></inspection-history>
+    </mat-expansion-panel>
+  </mat-accordion>
 </mat-card>

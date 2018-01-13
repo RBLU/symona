@@ -1,8 +1,9 @@
 <div *ngIf="run$ | async as run">
-  <mat-toolbar>
-
-    {{run.monitoring.name}} Start: {{run.started | date:'medium'}}
-    <mat-slide-toggle (change)="onIgnoreChange($event)" [checked]="run.ignored == 1">Ignorieren</mat-slide-toggle>
+  <mat-toolbar fxLayout="row" fxFlexAlign="space-between">
+    <div fxFlex="80%">{{run.monitoring.name}} Start: {{run.started | date:'medium'}}</div>
+    <div fxFlex="auto">
+      <mat-slide-toggle (change)="onIgnoreChange($event)" [checked]="run.ignored == 1">Ignorieren</mat-slide-toggle>
+    </div>
 
   </mat-toolbar>
   <div fxLayout="row">

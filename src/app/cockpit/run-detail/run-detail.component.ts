@@ -39,10 +39,6 @@ export class RunDetailComponent implements OnInit {
     }
   }
 
-  public onCloseHistory($event) {
-    this.showHistoryBoid = undefined;
-  }
-
   public onIgnoreChange(event) {
     this.monitoringService.ignoreRun(this.currentRunBoid, event.checked)
       .subscribe((next) => {
