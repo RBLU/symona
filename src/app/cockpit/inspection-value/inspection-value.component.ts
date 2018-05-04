@@ -105,8 +105,17 @@ export class InspectionValueComponent implements OnInit, OnChanges {
     }
   }
 
-  public showInspectionHistory(inspection) {
-    //this.showHistory.emit(inspection);
+  public autoReset() {
+    this.stats$.share().subscribe((stats)=> {
+      this.inspection.levelLowError = Math.max(stats.AVERAGE - 2*stats.STDDEV, 0);
+      this.inspection.levelLowWarning = Math.max(stats.AVERAGE - stats.STDDEV, 0);
+      this.inspection.levelHighWarning = Math.min(stats.AVERAGE + stats.STDDEV, stats.MAX);
+      this.inspection.levelHighError = Math.min(stats.AVERAGE + 2*stats.STDDEV, stats.MAX);
+    });
+  }
+
+  public save() {
+
   }
 
   private render(insp: Inspection) {
