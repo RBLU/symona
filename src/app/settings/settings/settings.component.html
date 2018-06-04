@@ -1,7 +1,11 @@
 <div fxLayout="row">
   <div fxFlex="33%">
+    <mat-list>
+      <mat-list-item>Monitorings</mat-list-item>
+    </mat-list>
     <mat-nav-list dense>
-      <mat-list-item *ngFor="let monitoring of monitorings$ | async" [routerLink]="[monitoring.boid]" routerLinkActive="active-link">
+      <mat-list-item *ngFor="let monitoring of monitorings$ | async" [routerLink]="[monitoring.boid]"
+                     routerLinkActive="active-link">
         <mat-icon matListIcon>poll</mat-icon>
         <h3 matLine>{{monitoring.name}}</h3>
         <p matLine>{{monitoring.target.type | titlecase}}: "{{monitoring.target.title}}"</p>
