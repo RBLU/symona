@@ -38,7 +38,7 @@ export class MockProvider {
 export class MockMonitoringService {
 
   getTargets() {
-    return Observable.of([]);
+    return Observable.of([MockProvider.mockTarget]);
   }
   getInspectionsForRun() {
     return Observable.of([MockProvider.mockInspection]);
