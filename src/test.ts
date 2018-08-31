@@ -12,6 +12,7 @@ import {
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
 import {Observable} from "rxjs/Observable";
+import { of } from 'rxjs';
 import {Run} from "./app/core/models/run";
 import {Inspection} from "./app/core/models/inspection";
 import {Monitoring} from "./app/core/models/monitoring";
@@ -38,25 +39,25 @@ export class MockProvider {
 export class MockMonitoringService {
 
   getTargets() {
-    return Observable.of([MockProvider.mockTarget]);
+    return of([MockProvider.mockTarget]);
   }
   getInspectionsForRun() {
-    return Observable.of([MockProvider.mockInspection]);
+    return of([MockProvider.mockInspection]);
   }
   getMonitorings() {
-    return Observable.of([MockProvider.mockMonitoring]);
+    return of([MockProvider.mockMonitoring]);
   }
 
   getMonitoringById() {
-    return Observable.of(MockProvider.mockMonitoring);
+    return of(MockProvider.mockMonitoring);
   }
 
   getRunById() {
-    return Observable.of(MockProvider.mockRun);
+    return of(MockProvider.mockRun);
   }
 
   getInspectionsForMonitoring() {
-    return Observable.of([MockProvider.mockInspection]);
+    return of([MockProvider.mockInspection]);
   }
 }
 

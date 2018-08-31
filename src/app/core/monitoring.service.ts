@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Run} from "./models/run";
-import {Observable} from "rxjs/Rx";
+import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment';
 import {Inspection} from "./models/inspection";
 import {Monitoring} from "./models/monitoring";
